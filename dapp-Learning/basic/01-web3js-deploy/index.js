@@ -10,6 +10,7 @@ require('dotenv').config();
 
 //读取 .env.example 文件中的 PRIVATE_KEY 值，这个值是账户的私钥
 const privatekey = process.env.PRIVATE_KEY;
+const infuraId = process.env.INFURA_ID;
 
 // 读取 Incrementer.sol 合约文件中的内容，以 uft-8 的格式 
 const source = fs.readFileSync('Incrementer.sol', 'utf8');
@@ -44,7 +45,7 @@ const bytecode = contractFile.evm.bytecode.object;
 const abi = contractFile.abi;
 
 // 创建一个 web3 对象，参数是一个主链或者测试链的网络，web3 交互将都是与这个网络来进行
-const web3 = new Web3('https://ropsten.infura.io/v3/' + process.env.INFURA_ID);    //INFURA_ID 值是一个  infura 项目的 ID
+const web3 = new Web3('https://data-seed-prebsc-1-s1.binance.org:8545');    //INFURA_ID 值是一个  infura 项目的 ID
 
 // 根据私钥计算出账户地址
 const account = web3.eth.accounts.privateKeyToAccount(privatekey);
@@ -95,5 +96,5 @@ Deploy()
   .catch((error) => {
     console.error(error);
     process.exit(1);
-  });
+});
 
